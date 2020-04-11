@@ -37,7 +37,7 @@ AfficheMatriceReelle(A,n,n);
 //Resolution du systeme
 
 
-int s;
+double s;
    Y[1]=b[1]/L[1][1];
 
     for(i=2;i<=n;i++){
@@ -50,14 +50,12 @@ int s;
 printf("\n Y est: \n");
 AfficherTabReel(Y,n,0);
 
-/*substitution_avant(L,b,Y,N,T);
-//substitution_arriere(A,Y,X,N,T);*/
 if(fabs(A[n][n])<1.0e-12)
             {
                     printf("La matrice n'est pas inversible!");
                       exit(-1);
             }
-        int somme;
+        double somme;
  x[n]=Y[n]/A[n][n];
         for(i=n-1;i>=1;i--)
         {

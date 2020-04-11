@@ -4,13 +4,9 @@
 
 void SOR(double**A,double*b,int n,double*x0,double eps,double omega,int itermax)
  {
-	double NormeInfDif(double*x,double*y,int n);
-	void AfficherTabReel(double*T,int N,int cas);
-	void ProdMatVect(double **A , double *x , double *y, int n)
- ;
 
-	double*TabReel(int N);
-	int i,j,it=0;
+	int i,j,it;
+//	it=0;
 	double erreur,somme;
 	double *y,*x1;
 	y=TabReel(n);

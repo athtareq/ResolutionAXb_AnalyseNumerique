@@ -22,6 +22,8 @@ void GaussPivotTotal(double **A,double *b,double*X,int n)
 
 	for(k=1;k<=n-1;k++)
 	{
+	    printf("\n Kultimate: %d \n",k);
+
 	mx=fabs(A[k][k]);
 	p=k;
 	q=k;
@@ -71,7 +73,7 @@ void GaussPivotTotal(double **A,double *b,double*X,int n)
 
 		if(pivot<1e-12)
 		{
-				printf("\n pas de solution \n");
+				printf("\n pas de solution ");
 				exit(-1);
 		}
      for(i=k+1;i<=n;i++)
@@ -89,7 +91,7 @@ void GaussPivotTotal(double **A,double *b,double*X,int n)
 
         if(fabs(A[n][n])<1.0e-12)
             {
-                    printf("La matrice n'est pas inversible!");
+                    printf("La matrice n'est pas inversible! \n");
                       exit(-1);
             }
 
@@ -108,9 +110,6 @@ void GaussPivotTotal(double **A,double *b,double*X,int n)
         }
 
          for(i=1;i<=n;i++) Xord[ordre[i]]=X[i];
-
-
-
 
         printf("La solution de ce systeme est:\n");
         AfficherTabReel(Xord,n,1);

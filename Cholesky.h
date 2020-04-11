@@ -67,7 +67,7 @@ if(sym!=0){
     AfficheMatriceReelle(Lt,N,N);
 
 
-  int s1;
+  double s1;
     Y[1]=b[1]/L[1][1];
     for(i=2;i<=N;i++){
       s1=0;
@@ -77,7 +77,7 @@ if(sym!=0){
         Y[i]=(b[i]-s1)/L[i][i];
         }
 
-  int s2;
+  double s2;
   X[N]=Y[N]/Lt[N][N];
   for(i=N-1;i>=1;i--){
 	s2=0;

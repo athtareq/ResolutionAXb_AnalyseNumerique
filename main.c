@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include "AfficheTabReel.h"
 #include "AfficheMatriceReelle.h"
 #include "TabReel.h"
@@ -20,6 +19,15 @@
 #include "GaussPivotTotal.h"
 #include "DecompLU.h"
 #include "Cholesky.h"
+#include "EglityVect.h"
+#include "DiffVect.h"
+#include "ProdScalaire.h"
+#include "Norme2.h"
+#include "multiVectScalaire.h"
+#include "SommeVect.h"
+#include "GradientParamOptimal.h"
+#include "GradientPasFixe.h"
+#include "GradientConj.h"
 
 
 
@@ -36,7 +44,7 @@ int main()
         int typeMeth,choixDir,choixIt;
         int itermax;
         int rep=1;
-
+        double alpha;
         int *T;
         void menu();
         void menuP();
@@ -114,8 +122,9 @@ do{
        do{printf("\n \n \t Choississez le type de resolution du systeme Ax=b : \n");
         printf("<1> methode directe \n");
         printf("<2> methode iterative \n");
-        printf("Choix <1-2> ? ");
-        scanf("%d",&typeMeth);}while(typeMeth!=1 && typeMeth!=2);
+        printf("<3> methode du gradient \n");
+        printf("Choix <1-3> ? ");
+        scanf("%d",&typeMeth);}while(typeMeth!=1 && typeMeth!=2 && typeMeth!=3);
 
  if(typeMeth==1){
     printf("Vous avez choisi de resoudre le systeme lineaire par une methode directe \n");
@@ -152,7 +161,7 @@ do{
 
      }
 
-else {
+else if(typeMeth==2) {
 printf("Vous avez choisi de resoudre le systeme lineaire par une methode iterative \n");
 
      do{printf("Choisissez une methode parmi les suivantes : \n");
@@ -176,10 +185,37 @@ switch(choixIt){
              SOR(A,b,n,x0,eps,omega,itermax);
              break;
   }
+  }
+  else if(typeMeth==3) {
+printf("Vous avez choisi de resoudre le systeme lineaire par une methode du gradient \n");
 
+     do{printf("Choisissez une methode parmi les suivantes : \n");
+     printf(" <1> methode de Gradient a pas optimal \n <2> methode de Gradient a pas fixe \n <3> methode Gradient conjugue \n");
+     printf("Choix <1-3> ? ");
+     scanf("%d",&choixIt);}while(choixIt<1 || choixIt>3);
 
+switch(choixIt){
+     case 1:
+             printf("Vous avez choisi la methode du gradient au parametre optimal pour resoudre le systeme Ax=b: \n");
+             GAPO(A,b,n,x0,eps,itermax);
+             break;
+
+     case 2:
+             printf("Vous avez choisi la methode du gradient au parametre fixe pour resoudre le systeme Ax=b: \n");
+             printf("Inserez le pas fixe alpha: ");
+             scanf("%lf",&alpha);
+             GAPF(A,b,n,x0,eps,itermax,alpha);
+             break;
+
+     case 3:
+             printf("Vous avez choisi la methode du Gradient conjugue pour resoudre le systeme Ax=b: \n");
+             GJ(A,b,n,x0,eps,itermax);
+             break;
+  }
 
 }
+
+
 fclose(pfichier);
 FreeMatriceReelle(A,n,n);
 FreeTabReel(x0,n);
